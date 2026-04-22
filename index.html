@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Misery Loves Company</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #f7f7f5;
+  --bg2: #ffffff;
+  --bg3: #f0f0ee;
+  --border: #e0e0dc;
+  --text: #111111;
+  --dim: #999990;
+  --red: #d42b2b;
+  --orange: #e07020;
+  --yellow: #c99000;
+  --green: #0a8a60;
+  --blue: #1a7fc0;
+  --purple: #8040c0;
+  --p1: #d44040;
+  --p2: #1a7fc0;
+  --p3: #0a8a60;
+  --p4: #c99000;
+  --p5: #8040c0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; overflow-x: hidden; }
+
+/* NAV */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(247,247,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px; height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  transform: translateY(-100%); transition: transform 0.3s;
+}
+.nav.show { transform: translateY(0); }
+.nav-brand { font-family: 'Bebas Neue'; font-size: 22px; letter-spacing: 1px; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--text); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  padding: 40px 24px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 70% 60% at 15% 50%, rgba(212,64,64,0.06) 0%, transparent 70%),
+              radial-gradient(ellipse 70% 60% at 85% 50%, rgba(26,127,192,0.06) 0%, transparent 70%);
+}
+.eyebrow { font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); margin-bottom: 20px; animation: up 0.7s ease both; }
+.hero-title { font-family: 'Bebas Neue'; font-size: clamp(80px, 15vw, 190px); line-height: 0.88; letter-spacing: 2px; background: linear-gradient(160deg,#111 0%,#555 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: up 0.7s ease 0.1s both; }
+.hero-title em { -webkit-text-fill-color: var(--red); color: var(--red); font-style: normal; }
+.hero-sub { font-family: 'JetBrains Mono'; font-size: 12px; color: var(--dim); letter-spacing: 0.1em; margin-top: 20px; animation: up 0.7s ease 0.2s both; }
+.chips { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 48px; animation: up 0.7s ease 0.35s both; }
+.chip { display: flex; align-items: center; gap: 8px; background: var(--bg2); border: 1px solid var(--border); border-radius: 999px; padding: 8px 18px; font-size: 13px; font-weight: 600; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.arrow { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; font-family: 'JetBrains Mono'; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); animation: up 0.7s ease 0.5s both; }
+.arrow-line { width: 1px; height: 44px; background: linear-gradient(to bottom, var(--dim), transparent); animation: pulse 1.6s ease infinite; }
+@keyframes up { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+/* SECTION */
+.section { max-width: 1400px; margin: 0 auto; padding: 80px 32px; }
+.sect-label { font-family: 'JetBrains Mono'; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+.sect-title { font-family: 'Bebas Neue'; font-size: clamp(40px, 6vw, 72px); line-height: 1; letter-spacing: 1px; margin-bottom: 40px; }
+hr { border: none; border-top: 1px solid var(--border); }
+
+/* STAT STRIP */
+.stat-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-bottom: 48px; }
+.stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.stat-label { font-family: 'JetBrains Mono'; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+.stat-val { font-family: 'Bebas Neue'; font-size: 42px; line-height: 1; }
+.stat-note { font-size: 11px; color: var(--dim); margin-top: 4px; }
+
+/* LEADERBOARD */
+.lb { display: flex; flex-direction: column; gap: 10px; }
+.lb-row { display: grid; grid-template-columns: 36px 200px 1fr 70px; align-items: center; gap: 16px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; opacity: 0; transform: translateX(-20px); transition: border-color 0.2s; }
+.lb-row:hover { border-color: #bbb; }
+.lb-row.anim { animation: slideIn 0.5s ease forwards; }
+@keyframes slideIn { to { opacity:1; transform:translateX(0); } }
+.lb-rank { font-family: 'Bebas Neue'; font-size: 32px; color: var(--dim); text-align: center; }
+.lb-rank.gold { color: #ffd700; } .lb-rank.silver { color: #c0c0c0; } .lb-rank.bronze { color: #cd7f32; }
+.lb-name { font-size: 15px; font-weight: 700; }
+.lb-meta { font-family: 'JetBrains Mono'; font-size: 10px; color: var(--dim); margin-top: 2px; }
+.lb-track { background: var(--bg3); border-radius: 4px; height: 8px; overflow: hidden; }
+.lb-fill { height: 100%; border-radius: 4px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+.lb-score { font-family: 'Bebas Neue'; font-size: 36px; text-align: right; }
+
+/* AWARDS */
+.awards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+.award { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 24px; position: relative; overflow: hidden; opacity: 0; transform: translateY(16px); transition: transform 0.25s, border-color 0.25s; }
+.award:hover { transform: translateY(-4px); border-color: #404058; }
+.award.anim { animation: cardUp 0.5s ease forwards; }
+@keyframes cardUp { to { opacity:1; transform:translateY(0); } }
+.award-top { height: 3px; position: absolute; top: 0; left: 0; right: 0; border-radius: 16px 16px 0 0; }
+.award-emoji { font-size: 38px; display: block; margin-bottom: 12px; }
+.award-cat { font-family: 'JetBrains Mono'; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); margin-bottom: 4px; }
+.award-winner { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+.award-body { font-size: 12px; color: #888; line-height: 1.65; }
+.award-stat { font-family: 'JetBrains Mono'; font-size: 10px; margin-top: 10px; padding: 4px 10px; border-radius: 4px; background: rgba(255,255,255,0.05); display: inline-block; }
+
+/* CHARTS */
+.charts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 20px; }
+.chart-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+.chart-card.wide { grid-column: span 2; }
+.chart-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.chart-sub { font-family: 'JetBrains Mono'; font-size: 10px; color: var(--dim); margin-bottom: 18px; }
+.chart-wrap { position: relative; height: 240px; }
+.chart-wrap-lg { position: relative; height: 300px; }
+
+.legend { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; }
+.leg-item { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; }
+.leg-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* TABLE */
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+thead th { font-family: 'JetBrains Mono'; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+tbody tr { border-bottom: 1px solid rgba(42,42,58,0.5); transition: background 0.15s; }
+tbody tr:hover { background: rgba(255,255,255,0.02); }
+tbody td { padding: 10px 12px; vertical-align: middle; }
+.cat-row td { background: var(--bg3); font-family: 'JetBrains Mono'; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); padding: 8px 12px; }
+.pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px; font-family: 'JetBrains Mono'; font-size: 10px; white-space: nowrap; }
+.p-good { background:rgba(10,138,96,0.08); color:#0a6b4a; border:1px solid rgba(10,138,96,0.2); }
+.p-warn { background:rgba(201,144,0,0.08); color:#8a6200; border:1px solid rgba(201,144,0,0.22); }
+.p-bad  { background:rgba(212,43,43,0.08); color:#a01818; border:1px solid rgba(212,43,43,0.2); }
+.p-dim  { background:rgba(153,153,144,0.1); color:var(--dim); border:1px solid rgba(153,153,144,0.25); }
+
+footer { border-top: 1px solid var(--border); padding: 32px; text-align: center; font-family: 'JetBrains Mono'; font-size: 10px; color: #aaa; letter-spacing: 0.08em; line-height: 2.2; }
+
+@media(max-width:900px){ .charts-grid{grid-template-columns:1fr;} .chart-card.wide{grid-column:span 1;} .lb-row{grid-template-columns:28px 1fr 56px;} .lb-bar-col{display:none;} .nav-links{display:none;} .section{padding:60px 20px;} }
+@media(max-width:600px){ .stat-strip{grid-template-columns:1fr 1fr;} .chips{gap:8px;} .chip{font-size:11px;padding:6px 12px;} }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-brand">Misery Loves Company</div>
+  <ul class="nav-links">
+    <li><a href="#scores">Scores</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#charts">Charts</a></li>
+    <li><a href="#table">All Data</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">HMI Health Screening · 17 April 2026 · Singapore</div>
+  <h1 class="hero-title">Misery<br><em>Loves</em><br>Company</h1>
+  <p class="hero-sub">5 people. 1 lab. Zero excuses. A health aggregator for the group chat.</p>
+  <div class="chips">
+    <div class="chip"><div class="dot" style="background:var(--p1)"></div>Wai Chit · M40</div>
+    <div class="chip"><div class="dot" style="background:var(--p2)"></div>Khalisah · F27</div>
+    <div class="chip"><div class="dot" style="background:var(--p3)"></div>Bryan · M25</div>
+    <div class="chip"><div class="dot" style="background:var(--p4)"></div>Jasmine · F45</div>
+    <div class="chip"><div class="dot" style="background:var(--p5)"></div>Celest · F24</div>
+  </div>
+  <div class="arrow"><span>scroll</span><div class="arrow-line"></div></div>
+</section>
+<hr>
+
+<!-- SCORES -->
+<section class="section" id="scores">
+  <div class="sect-label">01 — Wellness Leaderboard</div>
+  <div class="sect-title">Who's Winning<br>at Life?</div>
+
+  <div class="stat-strip">
+    <div class="stat-card"><div class="stat-label">Group Avg Score</div><div class="stat-val" style="color:var(--yellow)">63</div><div class="stat-note">/ 100 · Fair overall</div></div>
+    <div class="stat-card"><div class="stat-label">Total Flags Raised</div><div class="stat-val" style="color:var(--red)">16</div><div class="stat-note">Across all 5 people</div></div>
+    <div class="stat-card"><div class="stat-label">Shared Problem #1</div><div class="stat-val" style="font-size:30px;color:var(--orange)">Chol ↑</div><div class="stat-note">4/5 have TC ≥ 210 mg/dL</div></div>
+    <div class="stat-card"><div class="stat-label">Best Bloodwork</div><div class="stat-val" style="font-size:28px;color:var(--green)">Bryan</div><div class="stat-note">Despite highest BMI. Classic.</div></div>
+    <div class="stat-card"><div class="stat-label">Most Flags</div><div class="stat-val" style="font-size:28px;color:var(--red)">Wai Chit</div><div class="stat-note">BMI + LDL + ESR = trifecta</div></div>
+  </div>
+
+  <div class="lb" id="lb">
+    <div class="lb-row" data-w="72" data-c="var(--p5)" data-d="0">
+      <div class="lb-rank gold">1</div>
+      <div><div class="lb-name" style="color:var(--p5)">Celest Lee</div><div class="lb-meta">F24 · Best HDL in group · Elite kidney function</div></div>
+      <div class="lb-bar-col"><div class="lb-track"><div class="lb-fill" style="background:var(--p5)"></div></div></div>
+      <div class="lb-score" style="color:var(--p5)">72</div>
+    </div>
+    <div class="lb-row" data-w="68" data-c="var(--p2)" data-d="100">
+      <div class="lb-rank silver">2</div>
+      <div><div class="lb-name" style="color:var(--p2)">Nur Khalisah</div><div class="lb-meta">F27 · Healthy BMI · Excellent triglycerides</div></div>
+      <div class="lb-bar-col"><div class="lb-track"><div class="lb-fill" style="background:var(--p2)"></div></div></div>
+      <div class="lb-score" style="color:var(--p2)">68</div>
+    </div>
+    <div class="lb-row" data-w="63" data-c="var(--p3)" data-d="200">
+      <div class="lb-rank bronze">3</div>
+      <div><div class="lb-name" style="color:var(--p3)">Bryan Sim</div><div class="lb-meta">M25 · Perfect labs, terrible BMI. Youth is a cheat code.</div></div>
+      <div class="lb-bar-col"><div class="lb-track"><div class="lb-fill" style="background:var(--p3)"></div></div></div>
+      <div class="lb-score" style="color:var(--p3)">63</div>
+    </div>
+    <div class="lb-row" data-w="58" data-c="var(--p4)" data-d="300">
+      <div class="lb-rank">4</div>
+      <div><div class="lb-name" style="color:var(--p4)">Jasmine Huang</div><div class="lb-meta">F45 · Glucose creeping. Cholesterol borderline. Clock is ticking.</div></div>
+      <div class="lb-bar-col"><div class="lb-track"><div class="lb-fill" style="background:var(--p4)"></div></div></div>
+      <div class="lb-score" style="color:var(--p4)">58</div>
+    </div>
+    <div class="lb-row" data-w="55" data-c="var(--p1)" data-d="400">
+      <div class="lb-rank">5</div>
+      <div><div class="lb-name" style="color:var(--p1)">Chee Wai Chit</div><div class="lb-meta">M40 · Overweight, borderline lipids, elevated ESR. Four flags. Read the memo.</div></div>
+      <div class="lb-bar-col"><div class="lb-track"><div class="lb-fill" style="background:var(--p1)"></div></div></div>
+      <div class="lb-score" style="color:var(--p1)">55</div>
+    </div>
+  </div>
+</section>
+<hr>
+
+<!-- AWARDS -->
+<section class="section" id="awards">
+  <div class="sect-label">02 — The Awards Ceremony</div>
+  <div class="sect-title">And the<br>Award Goes To…</div>
+
+  <div class="awards-grid">
+
+    <div class="award" data-d="0">
+      <div class="award-top" style="background:var(--red)"></div>
+      <span class="award-emoji">🏆</span>
+      <div class="award-cat">Most Unhealthy</div>
+      <div class="award-winner" style="color:var(--p1)">Chee Wai Chit</div>
+      <div class="award-body">Four flags at age 40: overweight BMI (26.7), borderline LDL (152), borderline total cholesterol (215), and elevated ESR (20). The body is sending polite notes. These notes will become less polite.</div>
+      <div class="award-stat">Score: 55/100 · Flags: 4</div>
+    </div>
+
+    <div class="award" data-d="70">
+      <div class="award-top" style="background:var(--green)"></div>
+      <span class="award-emoji">💚</span>
+      <div class="award-cat">Most Likely to Live Forever</div>
+      <div class="award-winner" style="color:var(--p5)">Celest Lee</div>
+      <div class="award-body">HDL of 80 is genuinely elite. Chol/HDL ratio of 2.65 is the group's best. eGFR of 124 means her kidneys are filtering like a brand new machine. At 24, she might outlive the species.</div>
+      <div class="award-stat">HDL: 80 · eGFR: 124 · Ratio: 2.65</div>
+    </div>
+
+    <div class="award" data-d="140">
+      <div class="award-top" style="background:var(--orange)"></div>
+      <span class="award-emoji">🧈</span>
+      <div class="award-cat">Most Paradoxical Human Being</div>
+      <div class="award-winner" style="color:var(--p3)">Bryan Sim</div>
+      <div class="award-body">BMI of 28.8 — obese for an Asian male — but the cleanest blood in the room. Best LDL, best fasting glucose, best HbA1c, spotless urine. He is storing the fat somewhere the labs can't see. For now.</div>
+      <div class="award-stat">BMI: 28.8 ↑ · LDL: 118 ✓ · HbA1c: 5.2% ✓</div>
+    </div>
+
+    <div class="award" data-d="210">
+      <div class="award-top" style="background:var(--blue)"></div>
+      <span class="award-emoji">⏰</span>
+      <div class="award-cat">Most on a Countdown</div>
+      <div class="award-winner" style="color:var(--p4)">Jasmine Huang</div>
+      <div class="award-body">Fasting glucose of 99 is at the ceiling of normal. HbA1c at 5.7% is trending pre-diabetic. Borderline LDL. She has the most "watch these numbers" flags of anyone here. Act before they act.</div>
+      <div class="award-stat">Glucose: 99 · HbA1c: 5.7% · LDL: 141</div>
+    </div>
+
+    <div class="award" data-d="280">
+      <div class="award-top" style="background:var(--yellow)"></div>
+      <span class="award-emoji">🎭</span>
+      <div class="award-cat">Most Surprising Result</div>
+      <div class="award-winner" style="color:var(--p2)">Nur Khalisah</div>
+      <div class="award-body">She's 27, BMI 21.8, no conditions — and yet her total cholesterol matches a 40-year-old man's. Her triglycerides are an excellent 53, so it's likely genetic. Either way: more salad, fewer prata.</div>
+      <div class="award-stat">TC: 215 at age 27 · Triglycerides: 53 ✓</div>
+    </div>
+
+    <div class="award" data-d="350">
+      <div class="award-top" style="background:var(--purple)"></div>
+      <span class="award-emoji">💧</span>
+      <div class="award-cat">Best Hydration Award</div>
+      <div class="award-winner" style="color:var(--p5)">Celest Lee</div>
+      <div class="award-body">eGFR of 124 is off the charts — literally above the measurable range. Her kidneys are filtering at an exceptional rate. Either she drinks an impressive amount of water, or her kidneys are just built different.</div>
+      <div class="award-stat">eGFR: 124 ml/min · Ref: &gt;60</div>
+    </div>
+
+    <div class="award" data-d="420">
+      <div class="award-top" style="background:var(--green)"></div>
+      <span class="award-emoji">🫀</span>
+      <div class="award-cat">Best Cardiovascular Risk Profile</div>
+      <div class="award-winner" style="color:var(--p3)">Bryan Sim</div>
+      <div class="award-body">Lowest Chol/HDL ratio (2.93), lowest LDL (118), lowest triglycerides (67), ideal HbA1c (5.2%). His actual heart disease risk is minimal. The extra weight hasn't caught up to his bloodwork. Yet.</div>
+      <div class="award-stat">Chol/HDL: 2.93 · TG: 67 · LDL: 118</div>
+    </div>
+
+    <div class="award" data-d="490">
+      <div class="award-top" style="background:var(--red)"></div>
+      <span class="award-emoji">🔥</span>
+      <div class="award-cat">Most Inflamed</div>
+      <div class="award-winner" style="color:var(--p1)">Chee Wai Chit (solo)</div>
+      <div class="award-body">The only person with an elevated ESR (20, ref &lt;16). It's non-specific — could be stress, infection, or inflammation. But combined with borderline lipids and overweight status, it's a signal worth chasing.</div>
+      <div class="award-stat">ESR: 20 mm/hr · Ref: &lt;16</div>
+    </div>
+
+    <div class="award" data-d="560">
+      <div class="award-top" style="background:var(--yellow)"></div>
+      <span class="award-emoji">🍞</span>
+      <div class="award-cat">Group Trend Award</div>
+      <div class="award-winner" style="color:var(--yellow)">The Whole Gang</div>
+      <div class="award-body">4 out of 5 people have total cholesterol ≥ 210 mg/dL. Ages range from 24 to 45. Nobody reported a cholesterol diagnosis. This is either a shared diet problem or a remarkable coincidence. It is not a coincidence.</div>
+      <div class="award-stat">Group avg TC: 208 mg/dL · 4/5 above threshold</div>
+    </div>
+
+    <div class="award" data-d="630">
+      <div class="award-top" style="background:var(--blue)"></div>
+      <span class="award-emoji">🏅</span>
+      <div class="award-cat">Best Liver in the Room</div>
+      <div class="award-winner" style="color:var(--p2)">Nur Khalisah</div>
+      <div class="award-body">ALT of 11, GGT of 9 — both impressively low. Her liver is clearly not being burdened. Whatever she's doing (or not doing), keep it up.</div>
+      <div class="award-stat">ALT: 11 · AST: 23 · GGT: 9</div>
+    </div>
+
+    <div class="award" data-d="700">
+      <div class="award-top" style="background:var(--purple)"></div>
+      <span class="award-emoji">⚡</span>
+      <div class="award-cat">Best Kidney Function</div>
+      <div class="award-winner" style="color:var(--p2)">Nur Khalisah</div>
+      <div class="award-body">eGFR of 90 at age 27 is excellent. Clean creatinine, balanced electrolytes. Her kidneys are quietly doing a great job and asking for nothing in return.</div>
+      <div class="award-stat">eGFR: 90 · Creatinine: 0.88</div>
+    </div>
+
+    <div class="award" data-d="770">
+      <div class="award-top" style="background:var(--orange)"></div>
+      <span class="award-emoji">😬</span>
+      <div class="award-cat">Wake-Up Call Award</div>
+      <div class="award-winner" style="color:var(--p3)">Bryan Sim</div>
+      <div class="award-body">25 years old, obese BMI, and still clean labs. This is the exact window — before metabolic damage compounds — to fix the weight. In 5 years without action, Bryan's chart looks very different. Do it now, Bryan.</div>
+      <div class="award-stat">BMI: 28.8 · Age: 25 · Opportunity cost: high</div>
+    </div>
+
+  </div>
+</section>
+<hr>
+
+<!-- CHARTS -->
+<section class="section" id="charts">
+  <div class="sect-label">03 — Visual Breakdown</div>
+  <div class="sect-title">The Numbers,<br>Charted</div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--p1)"></div>Wai Chit</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--p2)"></div>Khalisah</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--p3)"></div>Bryan</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--p4)"></div>Jasmine</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--p5)"></div>Celest</div>
+  </div>
+
+  <div class="charts-grid">
+
+    <div class="chart-card">
+      <div class="chart-title">Wellness Score Leaderboard</div>
+      <div class="chart-sub">Overall health score / 100 · Based on all markers</div>
+      <div class="chart-wrap"><canvas id="scoreChart"></canvas></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Body Mass Index (BMI)</div>
+      <div class="chart-sub">Asian normal: 18.5–22.9 · Red = obese, orange = overweight</div>
+      <div class="chart-wrap"><canvas id="bmiChart"></canvas></div>
+    </div>
+
+    <div class="chart-card wide">
+      <div class="chart-title">Full Lipid Panel — TC, LDL, HDL</div>
+      <div class="chart-sub">mg/dL · Dashed lines mark thresholds: TC &lt;200, LDL &lt;130, HDL ≥60</div>
+      <div class="chart-wrap-lg"><canvas id="lipidChart"></canvas></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Triglycerides vs Fasting Glucose</div>
+      <div class="chart-sub">mg/dL · Lower is better for both</div>
+      <div class="chart-wrap"><canvas id="tgChart"></canvas></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">HbA1c (%)</div>
+      <div class="chart-sub">Glycated haemoglobin · Ideal 4.5–6.4% · ≥6.5 = diabetes zone</div>
+      <div class="chart-wrap"><canvas id="hba1cChart"></canvas></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Liver Enzymes — ALT, AST, GGT</div>
+      <div class="chart-sub">U/L · Lower is better · All within or near normal range</div>
+      <div class="chart-wrap"><canvas id="liverChart"></canvas></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Kidney Function — eGFR</div>
+      <div class="chart-sub">ml/min/1.73m² · Higher is better · Normal &gt;60</div>
+      <div class="chart-wrap"><canvas id="egfrChart"></canvas></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Chol / HDL Ratio</div>
+      <div class="chart-sub">Cardiovascular risk indicator · Lower is better · Normal &lt;4.6</div>
+      <div class="chart-wrap"><canvas id="ratioChart"></canvas></div>
+    </div>
+
+    <div class="chart-card wide">
+      <div class="chart-title">Multi-Metric Radar — Health Profile Overview</div>
+      <div class="chart-sub">Normalised scores (0–100) · Outer edge = better · BMI score is inverted so lower BMI = higher score</div>
+      <div class="chart-wrap-lg"><canvas id="radarChart"></canvas></div>
+    </div>
+
+  </div>
+</section>
+<hr>
+
+<!-- TABLE -->
+<section class="section" id="table">
+  <div class="sect-label">04 — Full Reference Data</div>
+  <div class="sect-title">Every Number,<br>Every Flag</div>
+  <div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th style="color:var(--p1)">Wai Chit ♂40</th>
+        <th style="color:var(--p2)">Khalisah ♀27</th>
+        <th style="color:var(--p3)">Bryan ♂25</th>
+        <th style="color:var(--p4)">Jasmine ♀45</th>
+        <th style="color:var(--p5)">Celest ♀24</th>
+        <th>Reference</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="cat-row"><td colspan="7">Biophysics</td></tr>
+      <tr><td>BMI (kg/m²)</td><td><span class="pill p-warn">26.7 ↑</span></td><td><span class="pill p-good">21.8</span></td><td><span class="pill p-bad">28.8 ↑↑</span></td><td><span class="pill p-warn">23.5 ↑</span></td><td><span class="pill p-warn">23.4 ↑</span></td><td>18.5–22.9</td></tr>
+      <tr><td>Systolic BP (mmHg)</td><td><span class="pill p-good">116</span></td><td><span class="pill p-good">118</span></td><td><span class="pill p-good">132</span></td><td><span class="pill p-good">120</span></td><td><span class="pill p-good">111</span></td><td>90–139</td></tr>
+      <tr><td>Diastolic BP (mmHg)</td><td><span class="pill p-good">75</span></td><td><span class="pill p-good">89</span></td><td><span class="pill p-good">81</span></td><td><span class="pill p-good">89</span></td><td><span class="pill p-good">79</span></td><td>60–89</td></tr>
+      <tr class="cat-row"><td colspan="7">Lipid Profile</td></tr>
+      <tr><td>Total Cholesterol (mg/dL)</td><td><span class="pill p-warn">215 ↑</span></td><td><span class="pill p-warn">215 ↑</span></td><td><span class="pill p-good">190</span></td><td><span class="pill p-warn">214 ↑</span></td><td><span class="pill p-warn">210 ↑</span></td><td>&lt;200</td></tr>
+      <tr><td>HDL (mg/dL)</td><td><span class="pill p-warn">53</span></td><td><span class="pill p-good">60 ✓</span></td><td><span class="pill p-good">65 ✓</span></td><td><span class="pill p-good">64 ✓</span></td><td><span class="pill p-good">80 ★</span></td><td>≥60 ideal</td></tr>
+      <tr><td>LDL (mg/dL)</td><td><span class="pill p-warn">152 ↑</span></td><td><span class="pill p-warn">150 ↑</span></td><td><span class="pill p-good">118</span></td><td><span class="pill p-warn">141 ↑</span></td><td><span class="pill p-good">123</span></td><td>&lt;130</td></tr>
+      <tr><td>Triglycerides (mg/dL)</td><td><span class="pill p-good">112</span></td><td><span class="pill p-good">53 ★</span></td><td><span class="pill p-good">67</span></td><td><span class="pill p-good">104</span></td><td><span class="pill p-good">65</span></td><td>&lt;150</td></tr>
+      <tr><td>Chol/HDL Ratio</td><td><span class="pill p-warn">4.09</span></td><td><span class="pill p-good">3.59</span></td><td><span class="pill p-good">2.93 ★</span></td><td><span class="pill p-good">3.32</span></td><td><span class="pill p-good">2.65 ★</span></td><td>&lt;4.6</td></tr>
+      <tr class="cat-row"><td colspan="7">Diabetes Panel</td></tr>
+      <tr><td>Fasting Glucose (mg/dL)</td><td><span class="pill p-good">85</span></td><td><span class="pill p-good">81</span></td><td><span class="pill p-good">76 ★</span></td><td><span class="pill p-warn">99 ↑</span></td><td><span class="pill p-good">83</span></td><td>70–108</td></tr>
+      <tr><td>HbA1c (%)</td><td><span class="pill p-good">5.9</span></td><td><span class="pill p-good">5.4</span></td><td><span class="pill p-good">5.2 ★</span></td><td><span class="pill p-warn">5.7</span></td><td><span class="pill p-good">5.1 ★</span></td><td>4.5–6.4</td></tr>
+      <tr class="cat-row"><td colspan="7">Liver Function</td></tr>
+      <tr><td>ALT / SGPT (U/L)</td><td><span class="pill p-good">24</span></td><td><span class="pill p-good">11 ★</span></td><td><span class="pill p-good">22</span></td><td><span class="pill p-good">16</span></td><td><span class="pill p-warn">36 ↑</span></td><td>&lt;36–51</td></tr>
+      <tr><td>AST / SGOT (U/L)</td><td><span class="pill p-good">16</span></td><td><span class="pill p-good">23</span></td><td><span class="pill p-good">30</span></td><td><span class="pill p-good">18</span></td><td><span class="pill p-good">24</span></td><td>&lt;36–51</td></tr>
+      <tr><td>GGT (U/L)</td><td><span class="pill p-good">19</span></td><td><span class="pill p-good">9 ★</span></td><td><span class="pill p-good">16</span></td><td><span class="pill p-good">13</span></td><td><span class="pill p-good">10</span></td><td>&lt;40–60</td></tr>
+      <tr class="cat-row"><td colspan="7">Kidney Function</td></tr>
+      <tr><td>eGFR (ml/min)</td><td><span class="pill p-good">79</span></td><td><span class="pill p-good">90</span></td><td><span class="pill p-good">84</span></td><td><span class="pill p-good">85</span></td><td><span class="pill p-good">124 ★</span></td><td>&gt;60</td></tr>
+      <tr><td>Creatinine (mg/dL)</td><td><span class="pill p-good">1.15</span></td><td><span class="pill p-good">0.88</span></td><td><span class="pill p-good">1.20</span></td><td><span class="pill p-good">0.84</span></td><td><span class="pill p-good">0.67</span></td><td>0.40–1.36</td></tr>
+      <tr class="cat-row"><td colspan="7">Haematology &amp; Thyroid (Wai Chit &amp; Jasmine only)</td></tr>
+      <tr><td>Haemoglobin (g/dL)</td><td><span class="pill p-good">15.5</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">13.6</span></td><td><span class="pill p-dim">—</span></td><td>11.5–18.0</td></tr>
+      <tr><td>ESR (mm/hr)</td><td><span class="pill p-warn">20 ↑</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">10</span></td><td><span class="pill p-dim">—</span></td><td>&lt;16–21</td></tr>
+      <tr><td>FT4 (pmol/L)</td><td><span class="pill p-good">15.0</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">16.7</span></td><td><span class="pill p-dim">—</span></td><td>12.0–22.0</td></tr>
+      <tr><td>TSH (mIU/L)</td><td><span class="pill p-good">0.794</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">2.120</span></td><td><span class="pill p-dim">—</span></td><td>0.27–4.20</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer>
+  <div>MISERY LOVES COMPANY · Health Aggregator · HMI Medical Centre Pte Ltd · Innoquest Diagnostics · 17 April 2026</div>
+  <div>This report is for informational purposes only and does not replace professional medical advice. Please consult your physician.</div>
+</footer>
+
+<script>
+// Nav
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('show', scrollY > 80);
+});
+
+// Intersection observer for lb rows + award cards
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const d = parseInt(el.dataset.d || 0);
+    setTimeout(() => {
+      el.classList.add('anim');
+      el.querySelectorAll('.lb-fill').forEach(f => {
+        const w = el.dataset.w;
+        if (w) setTimeout(() => f.style.width = w + '%', 200);
+      });
+    }, d);
+    io.unobserve(el);
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.lb-row, .award').forEach(el => io.observe(el));
+
+// Chart.js globals
+Chart.defaults.color = '#999990';
+Chart.defaults.font.family = "'JetBrains Mono', monospace";
+Chart.defaults.font.size = 11;
+
+const NAMES = ['Wai Chit','Khalisah','Bryan','Jasmine','Celest'];
+const C = ['#d44040','#1a7fc0','#0a8a60','#c99000','#8040c0'];
+const CA = ['rgba(212,64,64,0.75)','rgba(26,127,192,0.75)','rgba(10,138,96,0.75)','rgba(201,144,0,0.75)','rgba(128,64,192,0.75)'];
+const CB = ['rgba(212,64,64,0.15)','rgba(26,127,192,0.15)','rgba(10,138,96,0.15)','rgba(201,144,0,0.15)','rgba(128,64,192,0.15)'];
+const GC = 'rgba(0,0,0,0.07)';
+
+const base = {
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { display: false } },
+  scales: {
+    x: { grid: { color: GC }, ticks: { color: '#888' } },
+    y: { grid: { color: GC }, ticks: { color: '#606080' } }
+  }
+};
+
+// Wellness score (horizontal)
+new Chart('scoreChart', {
+  type: 'bar',
+  data: { labels: NAMES, datasets: [{ data:[55,68,63,58,72], backgroundColor:CA, borderColor:C, borderWidth:2, borderRadius:6 }] },
+  options: { ...base, indexAxis:'y',
+    plugins:{ legend:{display:false}, tooltip:{ callbacks:{label:c=>` ${c.parsed.x}/100`} } },
+    scales: { x:{min:0,max:100,grid:{color:GC},ticks:{color:'#888'}}, y:{grid:{color:'transparent'},ticks:{color:'#333',font:{size:12,weight:'700'}}} }
+  }
+});
+
+// BMI
+new Chart('bmiChart', {
+  type: 'bar',
+  data: { labels: NAMES, datasets: [{
+    data:[26.7,21.8,28.8,23.5,23.4],
+    backgroundColor:['rgba(224,112,32,0.8)','rgba(10,138,96,0.8)','rgba(212,43,43,0.8)','rgba(224,112,32,0.8)','rgba(224,112,32,0.8)'],
+    borderColor:['#e07020','#0a8a60','#d42b2b','#e07020','#e07020'],
+    borderWidth:2, borderRadius:6
+  }]},
+  options:{...base, plugins:{legend:{display:false}},
+    scales:{ x:{grid:{color:GC},ticks:{color:'#555'}}, y:{min:18,max:31,grid:{color:GC},ticks:{color:'#999'}} }
+  }
+});
+
+// Lipid grouped (wide)
+new Chart('lipidChart', {
+  type:'bar',
+  data:{
+    labels:NAMES,
+    datasets:[
+      {label:'Total Cholesterol',data:[215,215,190,214,210],backgroundColor:'rgba(255,107,107,0.7)',borderColor:'#ff6b6b',borderWidth:1.5,borderRadius:4},
+      {label:'LDL',data:[152,150,118,141,123],backgroundColor:'rgba(255,209,102,0.7)',borderColor:'#ffd166',borderWidth:1.5,borderRadius:4},
+      {label:'HDL',data:[53,60,65,64,80],backgroundColor:'rgba(6,214,160,0.7)',borderColor:'#06d6a0',borderWidth:1.5,borderRadius:4}
+    ]
+  },
+  options:{...base,
+    plugins:{legend:{display:true,labels:{color:'#555',boxWidth:10,padding:14}}},
+    scales:{x:{grid:{color:GC},ticks:{color:'#555'}},y:{grid:{color:GC},ticks:{color:'#999'}}}
+  }
+});
+
+// TG vs glucose
+new Chart('tgChart', {
+  type:'bar',
+  data:{
+    labels:NAMES,
+    datasets:[
+      {label:'Triglycerides',data:[112,53,67,104,65],backgroundColor:'rgba(199,125,255,0.7)',borderColor:'#c77dff',borderWidth:1.5,borderRadius:4},
+      {label:'Fasting Glucose',data:[85,81,76,99,83],backgroundColor:'rgba(76,201,240,0.7)',borderColor:'#4cc9f0',borderWidth:1.5,borderRadius:4}
+    ]
+  },
+  options:{...base, plugins:{legend:{display:true,labels:{color:'#555',boxWidth:10,padding:14}}},
+    scales:{x:{grid:{color:GC},ticks:{color:'#555'}},y:{grid:{color:GC},ticks:{color:'#999'}}}
+  }
+});
+
+// HbA1c
+new Chart('hba1cChart', {
+  type:'bar',
+  data:{labels:NAMES,datasets:[{
+    data:[5.9,5.4,5.2,5.7,5.1],
+    backgroundColor:['rgba(224,112,32,0.8)','rgba(10,138,96,0.8)','rgba(10,138,96,0.8)','rgba(224,112,32,0.8)','rgba(10,138,96,0.8)'],
+    borderColor:['#e07020','#0a8a60','#0a8a60','#e07020','#0a8a60'],
+    borderWidth:2,borderRadius:6
+  }]},
+  options:{...base,plugins:{legend:{display:false}},
+    scales:{x:{grid:{color:GC},ticks:{color:'#555'}},y:{min:4.5,max:7,grid:{color:GC},ticks:{color:'#999'}}}
+  }
+});
+
+// Liver
+new Chart('liverChart', {
+  type:'bar',
+  data:{labels:NAMES,datasets:[
+    {label:'ALT',data:[24,11,22,16,36],backgroundColor:'rgba(255,107,107,0.7)',borderColor:'#ff6b6b',borderWidth:1.5,borderRadius:4},
+    {label:'AST',data:[16,23,30,18,24],backgroundColor:'rgba(255,209,102,0.7)',borderColor:'#ffd166',borderWidth:1.5,borderRadius:4},
+    {label:'GGT',data:[19,9,16,13,10],backgroundColor:'rgba(6,214,160,0.7)',borderColor:'#06d6a0',borderWidth:1.5,borderRadius:4}
+  ]},
+  options:{...base,plugins:{legend:{display:true,labels:{color:'#555',boxWidth:10,padding:14}}},
+    scales:{x:{grid:{color:GC},ticks:{color:'#555'}},y:{grid:{color:GC},ticks:{color:'#999'}}}
+  }
+});
+
+// eGFR
+new Chart('egfrChart', {
+  type:'bar',
+  data:{labels:NAMES,datasets:[{data:[79,90,84,85,124],backgroundColor:CA,borderColor:C,borderWidth:2,borderRadius:6}]},
+  options:{...base,plugins:{legend:{display:false}},
+    scales:{x:{grid:{color:GC},ticks:{color:'#555'}},y:{min:60,grid:{color:GC},ticks:{color:'#999'}}}
+  }
+});
+
+// Chol/HDL ratio
+new Chart('ratioChart', {
+  type:'bar',
+  data:{labels:NAMES,datasets:[{data:[4.09,3.59,2.93,3.32,2.65],backgroundColor:CA,borderColor:C,borderWidth:2,borderRadius:6}]},
+  options:{...base,plugins:{legend:{display:false}},
+    scales:{x:{grid:{color:GC},ticks:{color:'#555'}},y:{min:0,max:5,grid:{color:GC},ticks:{color:'#999'}}}
+  }
+});
+
+// Radar (wide)
+new Chart('radarChart', {
+  type:'radar',
+  data:{
+    labels:['BMI Score','Cholesterol Score','LDL Score','HDL Score','Glucose Score','Liver Score','Kidney Score','Lipid Ratio Score'],
+    datasets:[
+      {label:'Wai Chit', data:[50,42,38,62,82,90,72,50], borderColor:'#d44040',backgroundColor:'rgba(212,64,64,0.05)',pointBackgroundColor:'#d44040',borderWidth:2},
+      {label:'Khalisah',data:[88,42,40,75,85,98,88,68], borderColor:'#1a7fc0',backgroundColor:'rgba(26,127,192,0.05)',pointBackgroundColor:'#1a7fc0',borderWidth:2},
+      {label:'Bryan',   data:[35,72,78,80,92,90,82,82], borderColor:'#0a8a60',backgroundColor:'rgba(10,138,96,0.05)',pointBackgroundColor:'#0a8a60',borderWidth:2},
+      {label:'Jasmine', data:[60,43,50,80,65,94,84,72], borderColor:'#c99000',backgroundColor:'rgba(201,144,0,0.05)',pointBackgroundColor:'#c99000',borderWidth:2},
+      {label:'Celest',  data:[60,52,65,100,82,75,100,90],borderColor:'#8040c0',backgroundColor:'rgba(128,64,192,0.05)',pointBackgroundColor:'#8040c0',borderWidth:2}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:true,position:'bottom',labels:{color:'#555',boxWidth:10,padding:14,font:{size:11}}}},
+    scales:{r:{
+      min:0,max:100,
+      grid:{color:'rgba(0,0,0,0.08)'},
+      angleLines:{color:'rgba(0,0,0,0.08)'},
+      ticks:{display:false},
+      pointLabels:{color:'#777',font:{size:10}}
+    }}
+  }
+});
+</script>
+</body>
+</html>
