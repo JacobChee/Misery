@@ -25,6 +25,7 @@
   --p3: #0a8a60;
   --p4: #c99000;
   --p5: #8040c0;
+  --p6: #d4820a;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -164,6 +165,7 @@ footer { border-top: 1px solid var(--border); padding: 32px; text-align: center;
     <div class="chip"><div class="dot" style="background:var(--p3)"></div>Bryan · M25</div>
     <div class="chip"><div class="dot" style="background:var(--p4)"></div>Jasmine · F45</div>
     <div class="chip"><div class="dot" style="background:var(--p5)"></div>Celest · F24</div>
+    <div class="chip"><div class="dot" style="background:var(--p6)"></div>Joie · F19</div>
   </div>
   <div class="arrow"><span>scroll</span><div class="arrow-line"></div></div>
 </section>
@@ -175,10 +177,10 @@ footer { border-top: 1px solid var(--border); padding: 32px; text-align: center;
   <div class="sect-title">Who's Winning<br>at Life?</div>
 
   <div class="stat-strip">
-    <div class="stat-card"><div class="stat-label">Group Avg Score</div><div class="stat-val" style="color:var(--yellow)">63</div><div class="stat-note">/ 100 · Fair overall</div></div>
-    <div class="stat-card"><div class="stat-label">Total Flags Raised</div><div class="stat-val" style="color:var(--red)">16</div><div class="stat-note">Across all 5 people</div></div>
-    <div class="stat-card"><div class="stat-label">Shared Problem #1</div><div class="stat-val" style="font-size:30px;color:var(--orange)">Chol ↑</div><div class="stat-note">4/5 have TC ≥ 210 mg/dL</div></div>
-    <div class="stat-card"><div class="stat-label">Best Bloodwork</div><div class="stat-val" style="font-size:28px;color:var(--green)">Bryan</div><div class="stat-note">Despite highest BMI. Classic.</div></div>
+    <div class="stat-card"><div class="stat-label">Group Avg Score</div><div class="stat-val" style="color:var(--yellow)">65</div><div class="stat-note">/ 100 · Fair overall</div></div>
+    <div class="stat-card"><div class="stat-label">Total Flags Raised</div><div class="stat-val" style="color:var(--red)">17</div><div class="stat-note">Across all 6 people</div></div>
+    <div class="stat-card"><div class="stat-label">Shared Problem #1</div><div class="stat-val" style="font-size:30px;color:var(--orange)">Chol ↑</div><div class="stat-note">4/6 have TC ≥ 210 mg/dL</div></div>
+    <div class="stat-card"><div class="stat-label">Best Bloodwork</div><div class="stat-val" style="font-size:28px;color:var(--green)">Joie</div><div class="stat-note">Elite lipids. Diastolic BP caveat.</div></div>
     <div class="stat-card"><div class="stat-label">Most Flags</div><div class="stat-val" style="font-size:28px;color:var(--red)">Wai Chit</div><div class="stat-note">BMI + LDL + ESR = trifecta</div></div>
   </div>
 
@@ -189,26 +191,32 @@ footer { border-top: 1px solid var(--border); padding: 32px; text-align: center;
       <div class="lb-bar-col"><div class="lb-track"><div class="lb-fill" style="background:var(--p5)"></div></div></div>
       <div class="lb-score" style="color:var(--p5)">72</div>
     </div>
-    <div class="lb-row" data-w="68" data-c="var(--p2)" data-d="100">
+    <div class="lb-row" data-w="70" data-c="var(--p6)" data-d="80">
       <div class="lb-rank silver">2</div>
+      <div><div class="lb-name" style="color:var(--p6)">Ching Ci Xuan Joie</div><div class="lb-meta">F19 · Textbook-perfect lipids · Diastolic BP needs monitoring</div></div>
+      <div class="lb-bar-col"><div class="lb-track"><div class="lb-fill" style="background:var(--p6)"></div></div></div>
+      <div class="lb-score" style="color:var(--p6)">70</div>
+    </div>
+    <div class="lb-row" data-w="68" data-c="var(--p2)" data-d="160">
+      <div class="lb-rank bronze">3</div>
       <div><div class="lb-name" style="color:var(--p2)">Nur Khalisah</div><div class="lb-meta">F27 · Healthy BMI · Excellent triglycerides</div></div>
       <div class="lb-bar-col"><div class="lb-track"><div class="lb-fill" style="background:var(--p2)"></div></div></div>
       <div class="lb-score" style="color:var(--p2)">68</div>
     </div>
-    <div class="lb-row" data-w="63" data-c="var(--p3)" data-d="200">
-      <div class="lb-rank bronze">3</div>
+    <div class="lb-row" data-w="63" data-c="var(--p3)" data-d="240">
+      <div class="lb-rank">4</div>
       <div><div class="lb-name" style="color:var(--p3)">Bryan Sim</div><div class="lb-meta">M25 · Perfect labs, terrible BMI. Youth is a cheat code.</div></div>
       <div class="lb-bar-col"><div class="lb-track"><div class="lb-fill" style="background:var(--p3)"></div></div></div>
       <div class="lb-score" style="color:var(--p3)">63</div>
     </div>
-    <div class="lb-row" data-w="58" data-c="var(--p4)" data-d="300">
-      <div class="lb-rank">4</div>
+    <div class="lb-row" data-w="58" data-c="var(--p4)" data-d="320">
+      <div class="lb-rank">5</div>
       <div><div class="lb-name" style="color:var(--p4)">Jasmine Huang</div><div class="lb-meta">F45 · Glucose creeping. Cholesterol borderline. Clock is ticking.</div></div>
       <div class="lb-bar-col"><div class="lb-track"><div class="lb-fill" style="background:var(--p4)"></div></div></div>
       <div class="lb-score" style="color:var(--p4)">58</div>
     </div>
     <div class="lb-row" data-w="55" data-c="var(--p1)" data-d="400">
-      <div class="lb-rank">5</div>
+      <div class="lb-rank">6</div>
       <div><div class="lb-name" style="color:var(--p1)">Chee Wai Chit</div><div class="lb-meta">M40 · Overweight, borderline lipids, elevated ESR. Four flags. Read the memo.</div></div>
       <div class="lb-bar-col"><div class="lb-track"><div class="lb-fill" style="background:var(--p1)"></div></div></div>
       <div class="lb-score" style="color:var(--p1)">55</div>
@@ -332,6 +340,24 @@ footer { border-top: 1px solid var(--border); padding: 32px; text-align: center;
       <div class="award-stat">BMI: 28.8 · Age: 25 · Opportunity cost: high</div>
     </div>
 
+    <div class="award" data-d="840">
+      <div class="award-top" style="background:var(--p6)"></div>
+      <span class="award-emoji">🦴</span>
+      <div class="award-cat">Most Alarming BMI</div>
+      <div class="award-winner" style="color:var(--p6)">Ching Ci Xuan Joie</div>
+      <div class="award-body">A BMI of 16.3 is clinically underweight for Asians, where the threshold starts at 18.5. Her lipids are genuinely exceptional — Chol/HDL ratio of 1.83 is the group's best — but the scale is telling a different story. Fix the BMI, keep the bloodwork.</div>
+      <div class="award-stat">BMI: 16.3 ↓↓ · Chol/HDL: 1.83 ★ · Age: 19</div>
+    </div>
+
+    <div class="award" data-d="910">
+      <div class="award-top" style="background:var(--orange)"></div>
+      <span class="award-emoji">💉</span>
+      <div class="award-cat">Surprise Diastolic Award</div>
+      <div class="award-winner" style="color:var(--p6)">Ching Ci Xuan Joie</div>
+      <div class="award-body">Systolic BP of 122 is textbook normal. But a diastolic of 100 at age 19 is unexpected and flagged as High. Everything else is clean. This one number warrants a follow-up — get it rechecked before dismissing it.</div>
+      <div class="award-stat">Systolic: 122 ✓ · Diastolic: 100 ↑ · Age: 19</div>
+    </div>
+
   </div>
 </section>
 <hr>
@@ -347,6 +373,7 @@ footer { border-top: 1px solid var(--border); padding: 32px; text-align: center;
     <div class="leg-item"><div class="leg-dot" style="background:var(--p3)"></div>Bryan</div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--p4)"></div>Jasmine</div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--p5)"></div>Celest</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--p6)"></div>Joie</div>
   </div>
 
   <div class="charts-grid">
@@ -423,35 +450,36 @@ footer { border-top: 1px solid var(--border); padding: 32px; text-align: center;
         <th style="color:var(--p3)">Bryan ♂25</th>
         <th style="color:var(--p4)">Jasmine ♀45</th>
         <th style="color:var(--p5)">Celest ♀24</th>
+        <th style="color:var(--p6)">Joie ♀19</th>
         <th>Reference</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="cat-row"><td colspan="7">Biophysics</td></tr>
-      <tr><td>BMI (kg/m²)</td><td><span class="pill p-warn">26.7 ↑</span></td><td><span class="pill p-good">21.8</span></td><td><span class="pill p-bad">28.8 ↑↑</span></td><td><span class="pill p-warn">23.5 ↑</span></td><td><span class="pill p-warn">23.4 ↑</span></td><td>18.5–22.9</td></tr>
-      <tr><td>Systolic BP (mmHg)</td><td><span class="pill p-good">116</span></td><td><span class="pill p-good">118</span></td><td><span class="pill p-good">132</span></td><td><span class="pill p-good">120</span></td><td><span class="pill p-good">111</span></td><td>90–139</td></tr>
-      <tr><td>Diastolic BP (mmHg)</td><td><span class="pill p-good">75</span></td><td><span class="pill p-good">89</span></td><td><span class="pill p-good">81</span></td><td><span class="pill p-good">89</span></td><td><span class="pill p-good">79</span></td><td>60–89</td></tr>
-      <tr class="cat-row"><td colspan="7">Lipid Profile</td></tr>
-      <tr><td>Total Cholesterol (mg/dL)</td><td><span class="pill p-warn">215 ↑</span></td><td><span class="pill p-warn">215 ↑</span></td><td><span class="pill p-good">190</span></td><td><span class="pill p-warn">214 ↑</span></td><td><span class="pill p-warn">210 ↑</span></td><td>&lt;200</td></tr>
-      <tr><td>HDL (mg/dL)</td><td><span class="pill p-warn">53</span></td><td><span class="pill p-good">60 ✓</span></td><td><span class="pill p-good">65 ✓</span></td><td><span class="pill p-good">64 ✓</span></td><td><span class="pill p-good">80 ★</span></td><td>≥60 ideal</td></tr>
-      <tr><td>LDL (mg/dL)</td><td><span class="pill p-warn">152 ↑</span></td><td><span class="pill p-warn">150 ↑</span></td><td><span class="pill p-good">118</span></td><td><span class="pill p-warn">141 ↑</span></td><td><span class="pill p-good">123</span></td><td>&lt;130</td></tr>
-      <tr><td>Triglycerides (mg/dL)</td><td><span class="pill p-good">112</span></td><td><span class="pill p-good">53 ★</span></td><td><span class="pill p-good">67</span></td><td><span class="pill p-good">104</span></td><td><span class="pill p-good">65</span></td><td>&lt;150</td></tr>
-      <tr><td>Chol/HDL Ratio</td><td><span class="pill p-warn">4.09</span></td><td><span class="pill p-good">3.59</span></td><td><span class="pill p-good">2.93 ★</span></td><td><span class="pill p-good">3.32</span></td><td><span class="pill p-good">2.65 ★</span></td><td>&lt;4.6</td></tr>
-      <tr class="cat-row"><td colspan="7">Diabetes Panel</td></tr>
-      <tr><td>Fasting Glucose (mg/dL)</td><td><span class="pill p-good">85</span></td><td><span class="pill p-good">81</span></td><td><span class="pill p-good">76 ★</span></td><td><span class="pill p-warn">99 ↑</span></td><td><span class="pill p-good">83</span></td><td>70–108</td></tr>
-      <tr><td>HbA1c (%)</td><td><span class="pill p-good">5.9</span></td><td><span class="pill p-good">5.4</span></td><td><span class="pill p-good">5.2 ★</span></td><td><span class="pill p-warn">5.7</span></td><td><span class="pill p-good">5.1 ★</span></td><td>4.5–6.4</td></tr>
-      <tr class="cat-row"><td colspan="7">Liver Function</td></tr>
-      <tr><td>ALT / SGPT (U/L)</td><td><span class="pill p-good">24</span></td><td><span class="pill p-good">11 ★</span></td><td><span class="pill p-good">22</span></td><td><span class="pill p-good">16</span></td><td><span class="pill p-warn">36 ↑</span></td><td>&lt;36–51</td></tr>
-      <tr><td>AST / SGOT (U/L)</td><td><span class="pill p-good">16</span></td><td><span class="pill p-good">23</span></td><td><span class="pill p-good">30</span></td><td><span class="pill p-good">18</span></td><td><span class="pill p-good">24</span></td><td>&lt;36–51</td></tr>
-      <tr><td>GGT (U/L)</td><td><span class="pill p-good">19</span></td><td><span class="pill p-good">9 ★</span></td><td><span class="pill p-good">16</span></td><td><span class="pill p-good">13</span></td><td><span class="pill p-good">10</span></td><td>&lt;40–60</td></tr>
-      <tr class="cat-row"><td colspan="7">Kidney Function</td></tr>
-      <tr><td>eGFR (ml/min)</td><td><span class="pill p-good">79</span></td><td><span class="pill p-good">90</span></td><td><span class="pill p-good">84</span></td><td><span class="pill p-good">85</span></td><td><span class="pill p-good">124 ★</span></td><td>&gt;60</td></tr>
-      <tr><td>Creatinine (mg/dL)</td><td><span class="pill p-good">1.15</span></td><td><span class="pill p-good">0.88</span></td><td><span class="pill p-good">1.20</span></td><td><span class="pill p-good">0.84</span></td><td><span class="pill p-good">0.67</span></td><td>0.40–1.36</td></tr>
-      <tr class="cat-row"><td colspan="7">Haematology &amp; Thyroid (Wai Chit &amp; Jasmine only)</td></tr>
-      <tr><td>Haemoglobin (g/dL)</td><td><span class="pill p-good">15.5</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">13.6</span></td><td><span class="pill p-dim">—</span></td><td>11.5–18.0</td></tr>
-      <tr><td>ESR (mm/hr)</td><td><span class="pill p-warn">20 ↑</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">10</span></td><td><span class="pill p-dim">—</span></td><td>&lt;16–21</td></tr>
-      <tr><td>FT4 (pmol/L)</td><td><span class="pill p-good">15.0</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">16.7</span></td><td><span class="pill p-dim">—</span></td><td>12.0–22.0</td></tr>
-      <tr><td>TSH (mIU/L)</td><td><span class="pill p-good">0.794</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">2.120</span></td><td><span class="pill p-dim">—</span></td><td>0.27–4.20</td></tr>
+      <tr class="cat-row"><td colspan="8">Biophysics</td></tr>
+      <tr><td>BMI (kg/m²)</td><td><span class="pill p-warn">26.7 ↑</span></td><td><span class="pill p-good">21.8</span></td><td><span class="pill p-bad">28.8 ↑↑</span></td><td><span class="pill p-warn">23.5 ↑</span></td><td><span class="pill p-warn">23.4 ↑</span></td><td><span class="pill p-bad">16.3 ↓↓</span></td><td>18.5–22.9</td></tr>
+      <tr><td>Systolic BP (mmHg)</td><td><span class="pill p-good">116</span></td><td><span class="pill p-good">118</span></td><td><span class="pill p-good">132</span></td><td><span class="pill p-good">120</span></td><td><span class="pill p-good">111</span></td><td><span class="pill p-good">122</span></td><td>90–139</td></tr>
+      <tr><td>Diastolic BP (mmHg)</td><td><span class="pill p-good">75</span></td><td><span class="pill p-good">89</span></td><td><span class="pill p-good">81</span></td><td><span class="pill p-good">89</span></td><td><span class="pill p-good">79</span></td><td><span class="pill p-bad">100 ↑</span></td><td>60–89</td></tr>
+      <tr class="cat-row"><td colspan="8">Lipid Profile</td></tr>
+      <tr><td>Total Cholesterol (mg/dL)</td><td><span class="pill p-warn">215 ↑</span></td><td><span class="pill p-warn">215 ↑</span></td><td><span class="pill p-good">190</span></td><td><span class="pill p-warn">214 ↑</span></td><td><span class="pill p-warn">210 ↑</span></td><td><span class="pill p-good">139 ★</span></td><td>&lt;200</td></tr>
+      <tr><td>HDL (mg/dL)</td><td><span class="pill p-warn">53</span></td><td><span class="pill p-good">60 ✓</span></td><td><span class="pill p-good">65 ✓</span></td><td><span class="pill p-good">64 ✓</span></td><td><span class="pill p-good">80 ★</span></td><td><span class="pill p-good">76 ★</span></td><td>≥60 ideal</td></tr>
+      <tr><td>LDL (mg/dL)</td><td><span class="pill p-warn">152 ↑</span></td><td><span class="pill p-warn">150 ↑</span></td><td><span class="pill p-good">118</span></td><td><span class="pill p-warn">141 ↑</span></td><td><span class="pill p-good">123</span></td><td><span class="pill p-good">64 ★</span></td><td>&lt;130</td></tr>
+      <tr><td>Triglycerides (mg/dL)</td><td><span class="pill p-good">112</span></td><td><span class="pill p-good">53 ★</span></td><td><span class="pill p-good">67</span></td><td><span class="pill p-good">104</span></td><td><span class="pill p-good">65</span></td><td><span class="pill p-good">48 ★</span></td><td>&lt;150</td></tr>
+      <tr><td>Chol/HDL Ratio</td><td><span class="pill p-warn">4.09</span></td><td><span class="pill p-good">3.59</span></td><td><span class="pill p-good">2.93 ★</span></td><td><span class="pill p-good">3.32</span></td><td><span class="pill p-good">2.65 ★</span></td><td><span class="pill p-good">1.83 ★</span></td><td>&lt;4.6</td></tr>
+      <tr class="cat-row"><td colspan="8">Diabetes Panel</td></tr>
+      <tr><td>Fasting Glucose (mg/dL)</td><td><span class="pill p-good">85</span></td><td><span class="pill p-good">81</span></td><td><span class="pill p-good">76 ★</span></td><td><span class="pill p-warn">99 ↑</span></td><td><span class="pill p-good">83</span></td><td><span class="pill p-good">90</span></td><td>70–108</td></tr>
+      <tr><td>HbA1c (%)</td><td><span class="pill p-good">5.9</span></td><td><span class="pill p-good">5.4</span></td><td><span class="pill p-good">5.2 ★</span></td><td><span class="pill p-warn">5.7</span></td><td><span class="pill p-good">5.1 ★</span></td><td><span class="pill p-dim">—</span></td><td>4.5–6.4</td></tr>
+      <tr class="cat-row"><td colspan="8">Liver Function</td></tr>
+      <tr><td>ALT / SGPT (U/L)</td><td><span class="pill p-good">24</span></td><td><span class="pill p-good">11 ★</span></td><td><span class="pill p-good">22</span></td><td><span class="pill p-good">16</span></td><td><span class="pill p-warn">36 ↑</span></td><td><span class="pill p-dim">—</span></td><td>&lt;36–51</td></tr>
+      <tr><td>AST / SGOT (U/L)</td><td><span class="pill p-good">16</span></td><td><span class="pill p-good">23</span></td><td><span class="pill p-good">30</span></td><td><span class="pill p-good">18</span></td><td><span class="pill p-good">24</span></td><td><span class="pill p-dim">—</span></td><td>&lt;36–51</td></tr>
+      <tr><td>GGT (U/L)</td><td><span class="pill p-good">19</span></td><td><span class="pill p-good">9 ★</span></td><td><span class="pill p-good">16</span></td><td><span class="pill p-good">13</span></td><td><span class="pill p-good">10</span></td><td><span class="pill p-dim">—</span></td><td>&lt;40–60</td></tr>
+      <tr class="cat-row"><td colspan="8">Kidney Function</td></tr>
+      <tr><td>eGFR (ml/min)</td><td><span class="pill p-good">79</span></td><td><span class="pill p-good">90</span></td><td><span class="pill p-good">84</span></td><td><span class="pill p-good">85</span></td><td><span class="pill p-good">124 ★</span></td><td><span class="pill p-dim">—</span></td><td>&gt;60</td></tr>
+      <tr><td>Creatinine (mg/dL)</td><td><span class="pill p-good">1.15</span></td><td><span class="pill p-good">0.88</span></td><td><span class="pill p-good">1.20</span></td><td><span class="pill p-good">0.84</span></td><td><span class="pill p-good">0.67</span></td><td><span class="pill p-dim">—</span></td><td>0.40–1.36</td></tr>
+      <tr class="cat-row"><td colspan="8">Haematology &amp; Thyroid (Wai Chit &amp; Jasmine only)</td></tr>
+      <tr><td>Haemoglobin (g/dL)</td><td><span class="pill p-good">15.5</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">13.6</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td>11.5–18.0</td></tr>
+      <tr><td>ESR (mm/hr)</td><td><span class="pill p-warn">20 ↑</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">10</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td>&lt;16–21</td></tr>
+      <tr><td>FT4 (pmol/L)</td><td><span class="pill p-good">15.0</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">16.7</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td>12.0–22.0</td></tr>
+      <tr><td>TSH (mIU/L)</td><td><span class="pill p-good">0.794</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-good">2.120</span></td><td><span class="pill p-dim">—</span></td><td><span class="pill p-dim">—</span></td><td>0.27–4.20</td></tr>
     </tbody>
   </table>
   </div>
@@ -459,7 +487,7 @@ footer { border-top: 1px solid var(--border); padding: 32px; text-align: center;
 
 <footer>
   <div>MISERY LOVES COMPANY · Health Aggregator · HMI Medical Centre Pte Ltd · Innoquest Diagnostics · 17 April 2026</div>
-  <div>This report is for informational purposes only and does not replace professional medical advice. Please consult your physician.</div>
+  <div>6 participants · This report is for informational purposes only and does not replace professional medical advice. Please consult your physician.</div>
 </footer>
 
 <script>
@@ -492,10 +520,10 @@ Chart.defaults.color = '#999990';
 Chart.defaults.font.family = "'JetBrains Mono', monospace";
 Chart.defaults.font.size = 11;
 
-const NAMES = ['Wai Chit','Khalisah','Bryan','Jasmine','Celest'];
-const C = ['#d44040','#1a7fc0','#0a8a60','#c99000','#8040c0'];
-const CA = ['rgba(212,64,64,0.75)','rgba(26,127,192,0.75)','rgba(10,138,96,0.75)','rgba(201,144,0,0.75)','rgba(128,64,192,0.75)'];
-const CB = ['rgba(212,64,64,0.15)','rgba(26,127,192,0.15)','rgba(10,138,96,0.15)','rgba(201,144,0,0.15)','rgba(128,64,192,0.15)'];
+const NAMES = ['Wai Chit','Khalisah','Bryan','Jasmine','Celest','Joie'];
+const C = ['#d44040','#1a7fc0','#0a8a60','#c99000','#8040c0','#d4820a'];
+const CA = ['rgba(212,64,64,0.75)','rgba(26,127,192,0.75)','rgba(10,138,96,0.75)','rgba(201,144,0,0.75)','rgba(128,64,192,0.75)','rgba(212,130,10,0.75)'];
+const CB = ['rgba(212,64,64,0.15)','rgba(26,127,192,0.15)','rgba(10,138,96,0.15)','rgba(201,144,0,0.15)','rgba(128,64,192,0.15)','rgba(212,130,10,0.15)'];
 const GC = 'rgba(0,0,0,0.07)';
 
 const base = {
@@ -510,7 +538,7 @@ const base = {
 // Wellness score (horizontal)
 new Chart('scoreChart', {
   type: 'bar',
-  data: { labels: NAMES, datasets: [{ data:[55,68,63,58,72], backgroundColor:CA, borderColor:C, borderWidth:2, borderRadius:6 }] },
+  data: { labels: NAMES, datasets: [{ data:[55,68,63,58,72,70], backgroundColor:CA, borderColor:C, borderWidth:2, borderRadius:6 }] },
   options: { ...base, indexAxis:'y',
     plugins:{ legend:{display:false}, tooltip:{ callbacks:{label:c=>` ${c.parsed.x}/100`} } },
     scales: { x:{min:0,max:100,grid:{color:GC},ticks:{color:'#888'}}, y:{grid:{color:'transparent'},ticks:{color:'#333',font:{size:12,weight:'700'}}} }
@@ -521,9 +549,9 @@ new Chart('scoreChart', {
 new Chart('bmiChart', {
   type: 'bar',
   data: { labels: NAMES, datasets: [{
-    data:[26.7,21.8,28.8,23.5,23.4],
-    backgroundColor:['rgba(224,112,32,0.8)','rgba(10,138,96,0.8)','rgba(212,43,43,0.8)','rgba(224,112,32,0.8)','rgba(224,112,32,0.8)'],
-    borderColor:['#e07020','#0a8a60','#d42b2b','#e07020','#e07020'],
+    data:[26.7,21.8,28.8,23.5,23.4,16.3],
+    backgroundColor:['rgba(224,112,32,0.8)','rgba(10,138,96,0.8)','rgba(212,43,43,0.8)','rgba(224,112,32,0.8)','rgba(224,112,32,0.8)','rgba(212,43,43,0.8)'],
+    borderColor:['#e07020','#0a8a60','#d42b2b','#e07020','#e07020','#d42b2b'],
     borderWidth:2, borderRadius:6
   }]},
   options:{...base, plugins:{legend:{display:false}},
@@ -537,9 +565,9 @@ new Chart('lipidChart', {
   data:{
     labels:NAMES,
     datasets:[
-      {label:'Total Cholesterol',data:[215,215,190,214,210],backgroundColor:'rgba(255,107,107,0.7)',borderColor:'#ff6b6b',borderWidth:1.5,borderRadius:4},
-      {label:'LDL',data:[152,150,118,141,123],backgroundColor:'rgba(255,209,102,0.7)',borderColor:'#ffd166',borderWidth:1.5,borderRadius:4},
-      {label:'HDL',data:[53,60,65,64,80],backgroundColor:'rgba(6,214,160,0.7)',borderColor:'#06d6a0',borderWidth:1.5,borderRadius:4}
+      {label:'Total Cholesterol',data:[215,215,190,214,210,139],backgroundColor:'rgba(255,107,107,0.7)',borderColor:'#ff6b6b',borderWidth:1.5,borderRadius:4},
+      {label:'LDL',data:[152,150,118,141,123,64],backgroundColor:'rgba(255,209,102,0.7)',borderColor:'#ffd166',borderWidth:1.5,borderRadius:4},
+      {label:'HDL',data:[53,60,65,64,80,76],backgroundColor:'rgba(6,214,160,0.7)',borderColor:'#06d6a0',borderWidth:1.5,borderRadius:4}
     ]
   },
   options:{...base,
@@ -554,8 +582,8 @@ new Chart('tgChart', {
   data:{
     labels:NAMES,
     datasets:[
-      {label:'Triglycerides',data:[112,53,67,104,65],backgroundColor:'rgba(199,125,255,0.7)',borderColor:'#c77dff',borderWidth:1.5,borderRadius:4},
-      {label:'Fasting Glucose',data:[85,81,76,99,83],backgroundColor:'rgba(76,201,240,0.7)',borderColor:'#4cc9f0',borderWidth:1.5,borderRadius:4}
+      {label:'Triglycerides',data:[112,53,67,104,65,48],backgroundColor:'rgba(199,125,255,0.7)',borderColor:'#c77dff',borderWidth:1.5,borderRadius:4},
+      {label:'Fasting Glucose',data:[85,81,76,99,83,90],backgroundColor:'rgba(76,201,240,0.7)',borderColor:'#4cc9f0',borderWidth:1.5,borderRadius:4}
     ]
   },
   options:{...base, plugins:{legend:{display:true,labels:{color:'#555',boxWidth:10,padding:14}}},
@@ -567,9 +595,9 @@ new Chart('tgChart', {
 new Chart('hba1cChart', {
   type:'bar',
   data:{labels:NAMES,datasets:[{
-    data:[5.9,5.4,5.2,5.7,5.1],
-    backgroundColor:['rgba(224,112,32,0.8)','rgba(10,138,96,0.8)','rgba(10,138,96,0.8)','rgba(224,112,32,0.8)','rgba(10,138,96,0.8)'],
-    borderColor:['#e07020','#0a8a60','#0a8a60','#e07020','#0a8a60'],
+    data:[5.9,5.4,5.2,5.7,5.1,null],
+    backgroundColor:['rgba(224,112,32,0.8)','rgba(10,138,96,0.8)','rgba(10,138,96,0.8)','rgba(224,112,32,0.8)','rgba(10,138,96,0.8)','rgba(153,153,144,0.4)'],
+    borderColor:['#e07020','#0a8a60','#0a8a60','#e07020','#0a8a60','#999990'],
     borderWidth:2,borderRadius:6
   }]},
   options:{...base,plugins:{legend:{display:false}},
@@ -581,9 +609,9 @@ new Chart('hba1cChart', {
 new Chart('liverChart', {
   type:'bar',
   data:{labels:NAMES,datasets:[
-    {label:'ALT',data:[24,11,22,16,36],backgroundColor:'rgba(255,107,107,0.7)',borderColor:'#ff6b6b',borderWidth:1.5,borderRadius:4},
-    {label:'AST',data:[16,23,30,18,24],backgroundColor:'rgba(255,209,102,0.7)',borderColor:'#ffd166',borderWidth:1.5,borderRadius:4},
-    {label:'GGT',data:[19,9,16,13,10],backgroundColor:'rgba(6,214,160,0.7)',borderColor:'#06d6a0',borderWidth:1.5,borderRadius:4}
+    {label:'ALT',data:[24,11,22,16,36,null],backgroundColor:'rgba(255,107,107,0.7)',borderColor:'#ff6b6b',borderWidth:1.5,borderRadius:4},
+    {label:'AST',data:[16,23,30,18,24,null],backgroundColor:'rgba(255,209,102,0.7)',borderColor:'#ffd166',borderWidth:1.5,borderRadius:4},
+    {label:'GGT',data:[19,9,16,13,10,null],backgroundColor:'rgba(6,214,160,0.7)',borderColor:'#06d6a0',borderWidth:1.5,borderRadius:4}
   ]},
   options:{...base,plugins:{legend:{display:true,labels:{color:'#555',boxWidth:10,padding:14}}},
     scales:{x:{grid:{color:GC},ticks:{color:'#555'}},y:{grid:{color:GC},ticks:{color:'#999'}}}
@@ -593,7 +621,7 @@ new Chart('liverChart', {
 // eGFR
 new Chart('egfrChart', {
   type:'bar',
-  data:{labels:NAMES,datasets:[{data:[79,90,84,85,124],backgroundColor:CA,borderColor:C,borderWidth:2,borderRadius:6}]},
+  data:{labels:NAMES,datasets:[{data:[79,90,84,85,124,null],backgroundColor:CA,borderColor:C,borderWidth:2,borderRadius:6}]},
   options:{...base,plugins:{legend:{display:false}},
     scales:{x:{grid:{color:GC},ticks:{color:'#555'}},y:{min:60,grid:{color:GC},ticks:{color:'#999'}}}
   }
@@ -602,7 +630,7 @@ new Chart('egfrChart', {
 // Chol/HDL ratio
 new Chart('ratioChart', {
   type:'bar',
-  data:{labels:NAMES,datasets:[{data:[4.09,3.59,2.93,3.32,2.65],backgroundColor:CA,borderColor:C,borderWidth:2,borderRadius:6}]},
+  data:{labels:NAMES,datasets:[{data:[4.09,3.59,2.93,3.32,2.65,1.83],backgroundColor:CA,borderColor:C,borderWidth:2,borderRadius:6}]},
   options:{...base,plugins:{legend:{display:false}},
     scales:{x:{grid:{color:GC},ticks:{color:'#555'}},y:{min:0,max:5,grid:{color:GC},ticks:{color:'#999'}}}
   }
@@ -618,7 +646,8 @@ new Chart('radarChart', {
       {label:'Khalisah',data:[88,42,40,75,85,98,88,68], borderColor:'#1a7fc0',backgroundColor:'rgba(26,127,192,0.05)',pointBackgroundColor:'#1a7fc0',borderWidth:2},
       {label:'Bryan',   data:[35,72,78,80,92,90,82,82], borderColor:'#0a8a60',backgroundColor:'rgba(10,138,96,0.05)',pointBackgroundColor:'#0a8a60',borderWidth:2},
       {label:'Jasmine', data:[60,43,50,80,65,94,84,72], borderColor:'#c99000',backgroundColor:'rgba(201,144,0,0.05)',pointBackgroundColor:'#c99000',borderWidth:2},
-      {label:'Celest',  data:[60,52,65,100,82,75,100,90],borderColor:'#8040c0',backgroundColor:'rgba(128,64,192,0.05)',pointBackgroundColor:'#8040c0',borderWidth:2}
+      {label:'Celest',  data:[60,52,65,100,82,75,100,90],borderColor:'#8040c0',backgroundColor:'rgba(128,64,192,0.05)',pointBackgroundColor:'#8040c0',borderWidth:2},
+      {label:'Joie',    data:[20,95,98,96,80,50,50,98], borderColor:'#d4820a',backgroundColor:'rgba(212,130,10,0.05)',pointBackgroundColor:'#d4820a',borderWidth:2}
     ]
   },
   options:{
